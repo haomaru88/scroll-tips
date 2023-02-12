@@ -8,35 +8,60 @@ class ShrikWrapEx extends StatelessWidget {
     {'key': 'item 4', 'value': 'description 4'},
     {'key': 'item 5', 'value': 'description 5'},
     {'key': 'item 6', 'value': 'description 6'},
+    {'key': 'item 7', 'value': 'description 7'},
+    {'key': 'item 8', 'value': 'description 8'},
+    {'key': 'item 9', 'value': 'description 9'},
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey[50],
       appBar: AppBar(
         title: Text('shrinkWrap'),
+        elevation: 6,
+        // shadowColor: Colors.black,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(10.0),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(),
-          ),
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: items.length,
-            itemBuilder: (context, idx) {
-              return Card(
-                child: ListTile(
-                  leading: CircleAvatar(
-                    child: Text(idx.toString()),
-                  ),
-                  title: Text(items[idx]['key']),
-                  subtitle: Text(items[idx]['value']),
+      body: SafeArea(
+        child: ListView.builder(
+          // shrinkWrap: true,
+          padding: EdgeInsets.symmetric(horizontal: 10.0),
+          itemCount: items.length,
+          itemBuilder: (context, idx) {
+            return Card(
+              margin: EdgeInsets.only(
+                top: 20.0,
+                bottom: (idx + 1) >= items.length ? 20.0 : 0,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+                side: BorderSide(width: 0.05),
+              ),
+              elevation: 7,
+              child: InkWell(
+                onTap: () {},
+                child: Column(
+                  children: [
+                    ListTile(
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                      leading: CircleAvatar(
+                        child: Text((idx + 1).toString()),
+                      ),
+                      title: Text(items[idx]['key']),
+                      subtitle: Text(items[idx]['value']),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'TEST',
+                        style: TextStyle(fontSize: 30, color: Colors.black.withOpacity(0.7)),
+                      ),
+                    ),
+                  ],
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
