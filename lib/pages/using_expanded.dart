@@ -15,8 +15,7 @@ class UsingExpanded extends StatelessWidget {
           Header(),
           FutureBuilder(
             future: JsonPlaceholder.getPosts(),
-            builder:
-                (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
+            builder: (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasError) {
                   return Center(
@@ -36,13 +35,17 @@ class UsingExpanded extends StatelessWidget {
                       return Column(
                         children: <Widget>[
                           ListTile(
+                            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                             leading: CircleAvatar(
                               child: Text((index + 1).toString()),
                             ),
                             title: Text(item.title),
                             subtitle: Text(item.body),
                           ),
-                          Divider(color: Colors.black38),
+                          Divider(
+                            color: Colors.black45,
+                            height: 1,
+                          ),
                         ],
                       );
                     },
