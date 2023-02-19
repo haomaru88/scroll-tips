@@ -25,13 +25,12 @@ class UsingExpanded extends StatelessWidget {
                     ),
                   );
                 }
-
                 return Expanded(
                   child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
                       final item = snapshot.data[index];
-
                       return Column(
                         children: <Widget>[
                           ListTile(
@@ -52,11 +51,13 @@ class UsingExpanded extends StatelessWidget {
                   ),
                 );
               } else {
-                return SizedBox(
-                  width: double.infinity,
-                  height: 100,
-                  child: Center(
-                    child: CircularProgressIndicator(),
+                return Expanded(
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 100,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
                 );
               }

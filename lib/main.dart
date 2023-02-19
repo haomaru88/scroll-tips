@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import 'package:scroll_ex/pages/keyboard_avoiding.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Scroll Tips',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -29,99 +31,102 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Scroll Tips'),
+        title: Text(
+          'Scroll Tips',
+        ),
+        centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            MyButton(
-              btnTitle: 'Using Expanded',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return UsingExpanded();
-                    },
-                  ),
-                );
-              },
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Expanded(
+          child: Container(
+            height: MediaQuery.of(context).size.height * (11.7 / 13),
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                ViewMenuItem(
+                  context: context,
+                  title: 'Using Expanded',
+                  subFunction: () => UsingExpanded(),
+                  isLastItem: false,
+                ),
+                ViewMenuItem(
+                  context: context,
+                  title: 'Using ListView only',
+                  subFunction: () => ListViewOnly(),
+                  isLastItem: false,
+                ),
+                ViewMenuItem(
+                  context: context,
+                  title: 'Primary Scroll',
+                  subFunction: () => PrimaryScroll(),
+                  isLastItem: false,
+                ),
+                ViewMenuItem(
+                  context: context,
+                  title: 'SliverList',
+                  subFunction: () => UsingSliverList(),
+                  isLastItem: false,
+                ),
+                ViewMenuItem(
+                  context: context,
+                  title: 'ShrinkWrap',
+                  subFunction: () => ShrikWrapEx(),
+                  isLastItem: false,
+                ),
+                ViewMenuItem(
+                  context: context,
+                  title: 'Keyboard avoiding',
+                  subFunction: () => KeyboardAvoiding(),
+                  isLastItem: true,
+                  color: Colors.tealAccent.shade700,
+                ),
+              ],
             ),
-            SizedBox(height: 20.0),
-            MyButton(
-              btnTitle: 'Using ListView only',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return ListViewOnly();
-                    },
-                  ),
-                );
-              },
-            ),
-            SizedBox(height: 20.0),
-            MyButton(
-              btnTitle: 'Primary Scroll',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return PrimaryScroll();
-                    },
-                  ),
-                );
-              },
-            ),
-            SizedBox(height: 20.0),
-            MyButton(
-              btnTitle: 'SliverList',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return UsingSliverList();
-                    },
-                  ),
-                );
-              },
-            ),
-            SizedBox(height: 20.0),
-            MyButton(
-              btnTitle: 'shrinkWrap?',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return ShrikWrapEx();
-                    },
-                  ),
-                );
-              },
-            ),
-            SizedBox(height: 20.0),
-            MyButton(
-              btnTitle: 'Keyboard avoiding',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return KeyboardAvoiding();
-                    },
-                  ),
-                );
-              },
-            ),
-          ],
+          ),
         ),
       ),
+    );
+  }
+}
+
+class ViewMenuItem extends StatelessWidget {
+  final BuildContext context;
+  final String title;
+  final Widget Function() subFunction;
+  final bool isLastItem;
+  final Color color;
+
+  ViewMenuItem({
+    this.context,
+    this.title,
+    this.isLastItem,
+    this.color,
+    this.subFunction,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        MyButton(
+          btnTitle: title,
+          color: color == null ? Colors.indigo : color,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return subFunction();
+                },
+              ),
+            );
+          },
+        ),
+        SizedBox(height: isLastItem ? 0.0 : 20.0),
+      ],
     );
   }
 }

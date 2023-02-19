@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class MyButton extends StatelessWidget {
   final String btnTitle;
   final Function onPressed;
+  final Color color;
 
-  MyButton({this.btnTitle, this.onPressed});
+  MyButton({this.btnTitle, this.onPressed, this.color = Colors.indigo});
 
   @override
   Widget build(BuildContext context) {
@@ -12,15 +13,16 @@ class MyButton extends StatelessWidget {
       child: Text(
         btnTitle,
         style: TextStyle(
-          fontSize: 18.0,
+          fontSize: 20.0,
           letterSpacing: 1.2,
         ),
       ),
       onPressed: onPressed,
-      color: Colors.indigo,
+      color: color,
       textColor: Colors.white,
-      minWidth: 250,
-      height: 50,
+      minWidth: 300,
+      height: 70,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
     );
   }
 }

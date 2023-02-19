@@ -41,8 +41,7 @@ class _KeyboardAvoidingState extends State<KeyboardAvoiding> {
           child: Container(
             height: MediaQuery.of(context).size.height,
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
+              padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -57,6 +56,7 @@ class _KeyboardAvoidingState extends State<KeyboardAvoiding> {
                     ),
                     SizedBox(height: 20.0),
                     TextFormField(
+                      autofocus: true,
                       onSaved: (value) => username = value,
                       decoration: InputDecoration(
                         labelText: 'username',

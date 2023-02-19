@@ -11,12 +11,12 @@ class UsingSliverList extends StatelessWidget {
         title: Text('Using SliverList'),
       ),
       body: CustomScrollView(
+        physics: BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverToBoxAdapter(child: Header()),
           FutureBuilder(
             future: JsonPlaceholder.getPosts(),
-            builder:
-                (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
+            builder: (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasError) {
                   return SliverFillRemaining(
@@ -33,7 +33,6 @@ class UsingSliverList extends StatelessWidget {
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
                       final item = snapshot.data[index];
-
                       return Column(
                         children: <Widget>[
                           ListTile(

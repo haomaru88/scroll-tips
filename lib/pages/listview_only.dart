@@ -38,16 +38,14 @@ class ListViewOnly extends StatelessWidget {
                 ),
               );
             }
-
             return ListView.builder(
+              physics: BouncingScrollPhysics(),
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext context, int index) {
                 final item = snapshot.data[index];
-
                 if (index == 0) {
                   return buildHeader(item);
                 }
-
                 return Column(
                   children: <Widget>[
                     ListTile(
@@ -63,11 +61,12 @@ class ListViewOnly extends StatelessWidget {
               },
             );
           } else {
-            return SizedBox(
-              width: double.infinity,
-              height: 100,
-              child: Center(
+            return Container(
+              alignment: Alignment.center,
+              child: SizedBox(
                 child: CircularProgressIndicator(),
+                width: 40,
+                height: 40,
               ),
             );
           }

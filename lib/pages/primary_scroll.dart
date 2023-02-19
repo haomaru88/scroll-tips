@@ -11,13 +11,14 @@ class PrimaryScroll extends StatelessWidget {
         title: Text('Primary Scroll'),
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        primary: false,
         child: Column(
           children: <Widget>[
             Header(),
             FutureBuilder(
               future: JsonPlaceholder.getPosts(),
-              builder:
-                  (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
+              builder: (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
                     return Center(
@@ -27,14 +28,12 @@ class PrimaryScroll extends StatelessWidget {
                       ),
                     );
                   }
-
                   return ListView.builder(
                     primary: false,
                     shrinkWrap: true,
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
                       final item = snapshot.data[index];
-
                       return Column(
                         children: <Widget>[
                           ListTile(
@@ -52,7 +51,7 @@ class PrimaryScroll extends StatelessWidget {
                 } else {
                   return SizedBox(
                     width: double.infinity,
-                    height: 100,
+                    height: MediaQuery.of(context).size.height / 2,
                     child: Center(
                       child: CircularProgressIndicator(),
                     ),
