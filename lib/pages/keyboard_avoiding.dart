@@ -38,8 +38,9 @@ class _KeyboardAvoidingState extends State<KeyboardAvoiding> {
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Container(
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery.of(context).size.height * (12 / 13),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
               child: Form(
@@ -116,7 +117,7 @@ class _KeyboardAvoidingState extends State<KeyboardAvoiding> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: 30.0),
                     MyButton(
                       btnTitle: 'REGISTER',
                       onPressed: submit,

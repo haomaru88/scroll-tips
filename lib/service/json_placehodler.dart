@@ -15,7 +15,7 @@ class JsonPlaceholder {
       // 100개의 아이템을 읽어오므로 너무 많아서 5개로 줄임.
       posts.removeRange(5, posts.length);
 
-      await Future.delayed(Duration(seconds: 3));
+      // await Future.delayed(Duration(seconds: 3));
 
       return posts;
     } catch (err) {
